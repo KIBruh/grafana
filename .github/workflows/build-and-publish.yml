@@ -34,8 +34,12 @@ jobs:
 
       - name: Build and push
         env:
-          IMAGE: ghcr.io/${{ github.repository_owner }}/grafana:${{ inputs.container-tag }}
+          OWNER: ${{ github.repository_owner }}
+          TAG: ${{ inputs.container-tag }}
         run: |
+          OWNER_LOWER=$(echo "$OWNER" | tr '[:upper:]' '[:lower:]')
+          TAG_LOWER=$(echo "$TAG" | tr '[:upper:]' '[:lower:]')
+          IMAGE="ghcr.io/${OWNER_LOWER}/grafana:${TAG_LOWER}"
           docker buildx build \
             --platform linux/amd64 \
             --push \
