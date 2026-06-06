@@ -341,6 +341,13 @@ describe('Format value', () => {
     expect(disp.text).toEqual('1,500,000');
   });
 
+  it('with value 12345 and unit eng', () => {
+    const value = 12345;
+    const instance = getDisplayProcessorFromConfig({ decimals: 2, unit: 'eng' });
+    const disp = instance(value);
+    expect(disp.text).toEqual('12.35e+3');
+  });
+
   it('with value 128000000 and unit bytes', () => {
     const value = 1280000125;
     const instance = getDisplayProcessorFromConfig({ decimals: null, unit: 'bytes' });

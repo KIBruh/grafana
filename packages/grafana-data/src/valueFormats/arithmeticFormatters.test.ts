@@ -1,4 +1,4 @@
-import { sci, toHex, toHex0x, toPercent, toPercentUnit } from './arithmeticFormatters';
+import { eng, sci, toHex, toHex0x, toPercent, toPercentUnit } from './arithmeticFormatters';
 import { formattedValueToString } from './baseFormatters';
 
 describe('scientific formatting', () => {
@@ -18,6 +18,38 @@ describe('scientific formatting', () => {
     it('renders the correct decimal scientific notation as expected', () => {
       const str = sci(1000, 2);
       expect(formattedValueToString(str)).toBe('1.00e+3');
+    });
+  });
+
+  describe('eng', () => {
+    it('follows the sad path as expected', () => {
+      const str = eng(null, 0);
+      expect(formattedValueToString(str)).toBe('');
+    });
+
+    it('renders the correct positive engineering notation as expected', () => {
+      const str = eng(1000, 0);
+      expect(formattedValueToString(str)).toBe('1e+3');
+    });
+
+    it('renders the correct negative engineering notation as expected', () => {
+      const str = eng(-1000000, 0);
+      expect(formattedValueToString(str)).toBe('-1e+6');
+    });
+
+    it('renders the correct decimal engineering notation as expected', () => {
+      const str = eng(12345, 2);
+      expect(formattedValueToString(str)).toBe('12.35e+3');
+    });
+
+    it('renders the correct small engineering notation as expected', () => {
+      const str = eng(0.0012, 1);
+      expect(formattedValueToString(str)).toBe('1.2e-3');
+    });
+
+    it('renders zero without an exponent as expected', () => {
+      const str = eng(0, 2);
+      expect(formattedValueToString(str)).toBe('0.00');
     });
   });
 });

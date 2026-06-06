@@ -2,7 +2,7 @@ import { t } from '@grafana/i18n';
 
 import { type ValueFormatCategory } from '../types/valueFormats';
 
-import { toHex, sci, toHex0x, toPercent, toPercentUnit } from './arithmeticFormatters';
+import { toHex, sci, eng, toHex0x, toPercent, toPercentUnit } from './arithmeticFormatters';
 import {
   locale,
   scaledUnits,
@@ -100,6 +100,11 @@ export const getCategories = (): ValueFormatCategory[] => [
         name: t('grafana-data.valueFormats.categories.misc.formats.name-scientific', 'Scientific notation'),
         id: 'sci',
         fn: sci,
+      },
+      {
+        name: t('grafana-data.valueFormats.categories.misc.formats.name-engineering', 'Engineering notation'),
+        id: 'eng',
+        fn: eng,
       },
       {
         name: t('grafana-data.valueFormats.categories.misc.formats.name-locale', 'Locale format'),

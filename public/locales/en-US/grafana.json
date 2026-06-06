@@ -9871,6 +9871,7 @@
             "name-percent-1": "Percent (0.0-1.0)",
             "name-percent-100": "Percent (0-100)",
             "name-pixels": "Pixels",
+            "name-engineering": "Engineering notation",
             "name-scientific": "Scientific notation",
             "name-short": "short",
             "name-si-short": "SI short",

@@ -45,3 +45,24 @@ export function sci(value: number | null, decimals: DecimalCount): FormattedValu
   }
   return { text: value.toExponential(decimals ?? undefined) };
 }
+
+export function eng(value: number | null, decimals: DecimalCount): FormattedValue {
+  if (value == null) {
+    return { text: '' };
+  }
+
+  if (!Number.isFinite(value)) {
+    return { text: value.toLocaleString() };
+  }
+
+  if (value === 0) {
+    return { text: toFixed(value, decimals) };
+  }
+
+  const exponent = Math.floor(Math.log10(Math.abs(value)) / 3) * 3;
+  const mantissa = value / Math.pow(10, exponent);
+
+  return {
+    text: `${toFixed(mantissa, decimals)}e${exponent >= 0 ? '+' : ''}${exponent}`,
+  };
+}
